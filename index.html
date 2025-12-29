@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JoJo's Bizarre Adventure - Base de Données Personnages</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌟 JoJo's Bizarre Adventure</h1>
+            <p class="subtitle">Base de données des personnages</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Formulaire d'ajout/modification -->
+            <div class="card form-card">
+                <h2 id="form-title">➕ Ajouter un personnage</h2>
+                <form id="character-form">
+                    <input type="hidden" id="character-id">
+                    
+                    <div class="form-group">
+                        <label for="name">Nom du personnage *</label>
+                        <input type="text" id="name" required placeholder="Ex: Jotaro Kujo">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="photo">URL de la photo</label>
+                        <input type="url" id="photo" placeholder="https://example.com/photo.jpg">
+                        <small>Ou vous pouvez laisser vide et ajouter plus tard</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="part">Partie de JoJo</label>
+                        <select id="part">
+                            <option value="">Sélectionner...</option>
+                            <option value="Part 1: Phantom Blood">Part 1: Phantom Blood</option>
+                            <option value="Part 2: Battle Tendency">Part 2: Battle Tendency</option>
+                            <option value="Part 3: Stardust Crusaders">Part 3: Stardust Crusaders</option>
+                            <option value="Part 4: Diamond is Unbreakable">Part 4: Diamond is Unbreakable</option>
+                            <option value="Part 5: Golden Wind">Part 5: Golden Wind</option>
+                            <option value="Part 6: Stone Ocean">Part 6: Stone Ocean</option>
+                            <option value="Part 7: Steel Ball Run">Part 7: Steel Ball Run</option>
+                            <option value="Part 8: JoJolion">Part 8: JoJolion</option>
+                            <option value="Part 9: The JOJOLands">Part 9: The JOJOLands</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stand">Nom du Stand</label>
+                        <input type="text" id="stand" placeholder="Ex: Star Platinum">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="alignment">Alignement</label>
+                        <select id="alignment">
+                            <option value="">Sélectionner...</option>
+                            <option value="Gentil">Gentil</option>
+                            <option value="Méchant">Méchant</option>
+                            <option value="Neutre">Neutre</option>
+                            <option value="Anti-héros">Anti-héros</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">Statut</label>
+                        <select id="status">
+                            <option value="">Sélectionner...</option>
+                            <option value="Vivant">Vivant</option>
+                            <option value="Mort">Mort</option>
+                            <option value="Inconnu">Inconnu</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="relationships">Relations et parenté</label>
+                        <textarea id="relationships" rows="3" placeholder="Ex: Fils de Holly Kujo, petit-fils de Joseph Joestar..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="notes">Notes personnelles</label>
+                        <textarea id="notes" rows="4" placeholder="Ajoutez vos notes personnelles sur ce personnage..."></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="submit-btn">Ajouter</button>
+                        <button type="button" class="btn btn-secondary" id="cancel-btn" style="display: none;">Annuler</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Filtres et recherche -->
+            <div class="card filters-card">
+                <div class="search-bar">
+                    <input type="text" id="search-input" placeholder="🔍 Rechercher un personnage...">
+                </div>
+                <div class="filters">
+                    <select id="filter-part">
+                        <option value="">Toutes les parties</option>
+                        <option value="Part 1: Phantom Blood">Part 1</option>
+                        <option value="Part 2: Battle Tendency">Part 2</option>
+                        <option value="Part 3: Stardust Crusaders">Part 3</option>
+                        <option value="Part 4: Diamond is Unbreakable">Part 4</option>
+                        <option value="Part 5: Golden Wind">Part 5</option>
+                        <option value="Part 6: Stone Ocean">Part 6</option>
+                        <option value="Part 7: Steel Ball Run">Part 7</option>
+                        <option value="Part 8: JoJolion">Part 8</option>
+                        <option value="Part 9: The JOJOLands">Part 9</option>
+                    </select>
+                    <select id="filter-alignment">
+                        <option value="">Tous les alignements</option>
+                        <option value="Gentil">Gentil</option>
+                        <option value="Méchant">Méchant</option>
+                        <option value="Neutre">Neutre</option>
+                        <option value="Anti-héros">Anti-héros</option>
+                    </select>
+                    <select id="filter-status">
+                        <option value="">Tous les statuts</option>
+                        <option value="Vivant">Vivant</option>
+                        <option value="Mort">Mort</option>
+                        <option value="Inconnu">Inconnu</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Liste des personnages -->
+            <div id="characters-grid" class="characters-grid">
+                <!-- Les personnages seront ajoutés ici dynamiquement -->
+            </div>
+
+            <!-- Message si aucun personnage -->
+            <div id="empty-message" class="empty-message" style="display: none;">
+                <p>🌟 Aucun personnage ajouté pour le moment. Ajoutez-en un ci-dessus !</p>
+            </div>
+        </div>
+
+        <!-- Bouton pour exporter/importer les données -->
+        <div class="card actions-card">
+            <h3>Gestion des données</h3>
+            <div class="action-buttons">
+                <button class="btn btn-secondary" id="export-btn">📥 Exporter les données (JSON)</button>
+                <label for="import-input" class="btn btn-secondary">📤 Importer des données (JSON)</label>
+                <input type="file" id="import-input" accept=".json" style="display: none;">
+                <button class="btn btn-danger" id="clear-btn">🗑️ Effacer toutes les données</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
